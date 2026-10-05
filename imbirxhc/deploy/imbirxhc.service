@@ -1,0 +1,27 @@
+[Unit]
+Description=imbirxhc Discord bot
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=imbirxhc
+WorkingDirectory=/opt/imbirxhc
+EnvironmentFile=/etc/imbirxhc.env
+Environment=DATA_DIR=/var/lib/imbirxhc
+Environment=PYTHONUNBUFFERED=1
+StateDirectory=imbirxhc
+ExecStart=/opt/imbirxhc/.venv/bin/python -u /opt/imbirxhc/bot.py
+Restart=on-failure
+RestartSec=15
+KillSignal=SIGTERM
+TimeoutStopSec=60
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/imbirxhc
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,28 @@
+services:
+  imbirxhc:
+    build: .
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 60s
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN:?Set DISCORD_TOKEN}
+      GUILD_ID: ${GUILD_ID:?Set GUILD_ID}
+      SUPPORT_ROLE_ID: ${SUPPORT_ROLE_ID:?Set SUPPORT_ROLE_ID}
+      PLAYER_ROLE_ID: ${PLAYER_ROLE_ID:?Set PLAYER_ROLE_ID}
+      PUNISHMENTS_CHANNEL_ID: ${PUNISHMENTS_CHANNEL_ID:?Set PUNISHMENTS_CHANNEL_ID}
+      SUGGESTIONS_CHANNEL_ID: ${SUGGESTIONS_CHANNEL_ID:?Set SUGGESTIONS_CHANNEL_ID}
+      TICKET_PANEL_CHANNEL_ID: ${TICKET_PANEL_CHANNEL_ID:?Set TICKET_PANEL_CHANNEL_ID}
+      VERIFY_CHANNEL_ID: ${VERIFY_CHANNEL_ID:?Set VERIFY_CHANNEL_ID}
+      TICKET_LOG_CHANNEL_ID: ${TICKET_LOG_CHANNEL_ID:-0}
+      WELCOME_CHANNEL_ID: ${WELCOME_CHANNEL_ID:-0}
+      STAFF_ROLE_IDS: ${STAFF_ROLE_IDS:-}
+      DATA_DIR: /app/data
+    volumes:
+      - bot-data:/app/data
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+volumes:
+  bot-data:
